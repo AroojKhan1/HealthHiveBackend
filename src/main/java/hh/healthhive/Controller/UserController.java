@@ -6,13 +6,20 @@ import hh.healthhive.Model.User;
 import hh.healthhive.Repository.RoleRepository;
 import hh.healthhive.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
+
+import javax.validation.Valid;
 import java.util.List;
 
 
 @RestController
 @CrossOrigin(origins = "*")
+@Validated
 
 public class UserController {
 
@@ -23,15 +30,25 @@ public class UserController {
         private RoleRepository roleRepository;
 
         @PostMapping("/register")
-        public String register(@RequestBody User user) {
-            Role role = new Role();
-            role.setRole(user.getRole());
-            repository.save(user);
-            role.setUser(user);
-            roleRepository.save(role);
-            user.getRoles().add(role);
+        public ResponseEntity<String> register(@Valid @RequestBody User user) {
 
-            return "Hi " + user.getUser_name() + " your Registration process successfully completed ur id is " + user.getIdUser();
+
+            String suc= "Hi " + user.getUser_name() + "Welcome to the Hive! Login using your username & password";
+            try {
+                Role role = new Role();
+                role.setRole(user.getRole());
+                repository.save(user);
+                role.setUser(user);
+                roleRepository.save(role);
+                user.getRoles().add(role);
+
+                // Return success response
+                String message = ""+suc;
+                return new ResponseEntity<>(message, HttpStatus.OK);
+            } catch (Exception e) {
+                String errorMessage = "An error occurred while registering the user.";
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
+            }
         }
 
         @GetMapping("/getAllUsers")
