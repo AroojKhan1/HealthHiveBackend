@@ -1,7 +1,9 @@
 package hh.healthhive.Controller;
 
 
+import hh.healthhive.Model.Role;
 import hh.healthhive.Model.User;
+import hh.healthhive.Repository.RoleRepository;
 import hh.healthhive.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +19,18 @@ public class UserController {
         @Autowired
         private UserRepository repository;
 
+        @Autowired
+        private RoleRepository roleRepository;
+
         @PostMapping("/register")
         public String register(@RequestBody User user) {
+            Role role = new Role();
+            role.setRole(user.getRole());
             repository.save(user);
+            role.setUser(user);
+            roleRepository.save(role);
+            user.getRoles().add(role);
+
             return "Hi " + user.getUser_name() + " your Registration process successfully completed ur id is " + user.getIdUser();
         }
 
