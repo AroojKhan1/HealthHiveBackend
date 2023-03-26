@@ -1,19 +1,35 @@
-//package hh.healthhive.Model;
-//
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-//import lombok.ToString;
-//
-//import javax.persistence.Entity;
-//import javax.persistence.Table;
-//
-//@Entity
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@ToString
-//@Table(name="To_Do")
-//public class ToDo {
-//
-//}
+package hh.healthhive.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@Table(name="To_Do")
+public class ToDo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @NotNull(message = "The field must not be empty")
+    private String item;
+
+    @NotNull
+    private boolean completed;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+
+
+
+}
