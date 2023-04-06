@@ -2,10 +2,7 @@ package hh.healthhive.Model;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-        import lombok.Data;
-        import lombok.NoArgsConstructor;
-        import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.GeneratedValue;
 import javax.validation.constraints.Email;
@@ -21,13 +18,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Getter
+@Setter
 @Table(name="User",uniqueConstraints = @UniqueConstraint(columnNames = "user_name"))
 public class User {
 
 
     @Id
-    @GeneratedValue
-    private int idUser;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int id_user;
 
     @NotNull
     private String user_name;
@@ -38,7 +37,7 @@ public class User {
 
     @NotNull
     @Min(value = 18, message = "Age must be greater than or equal to 18")
-    private String age;
+    private int age;
 
     @Column(nullable = false)
     @Size(min = 8, max = 20)
