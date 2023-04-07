@@ -51,7 +51,7 @@ public class AdminController {
                     adminDetail.getRole(), 43200000);
             // get Token.
             String token = tokenData[0];
-            System.out.println("Authorization :: " + token);
+            System.out.println("Authorization: Bearer " + token);
 
             // Create the Header Object
             httpHeader = new HttpHeaders();
