@@ -26,7 +26,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id_user;
+    private Long id_user;
 
     @NotNull
     private String user_name;
@@ -62,5 +62,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ToDo> todoList = new ArrayList<>();
 
+
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<SymptomJournal> symptomJournal = new ArrayList<>();
 
 }

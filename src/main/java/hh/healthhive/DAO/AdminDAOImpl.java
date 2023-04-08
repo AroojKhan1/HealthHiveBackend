@@ -53,7 +53,8 @@ public class AdminDAOImpl {
             int size = list.size();
             if(size == 1)
             {
-                return list.get(0).getId_user();
+                //cast added to convert to int from long
+                return list.get(0).getId_user().intValue();
             }
             else
             {

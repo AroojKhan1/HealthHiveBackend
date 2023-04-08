@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class TodoController {
 
@@ -19,21 +20,34 @@ public class TodoController {
     @PostMapping("/addTodo")
     public String addTodo(@Valid @RequestBody ToDo todo) {
         todoRepository.save(todo);
-        return "saved!";
+        return "Added!";
     }
+//    @ResponseBody
+//    @GetMapping("/yourTodos")
+//    public List<ToDo> getTodos() {
+//        return todoRepository.findAll();
+//    }
+
+
+    @GetMapping("/yourTodos/{id}")
     @ResponseBody
-    @GetMapping("/yourTodos")
-    public List<ToDo> getTodos() {
-        return todoRepository.findAll();
+    public List<ToDo> getTodo(@PathVariable Long id) {
+        System.out.println(id);
+//        List<ToDo> todos = todoRepository.findAll();
+
+        List<ToDo> todos = todoRepository.findByUserId(id);
+        return todos;
     }
 
-    @PutMapping("/{id}")
+
+
+//backend working fine & dndy chk front end for this...
+    @PutMapping("/yourTodos/{id}")
     public ResponseEntity<ToDo> updateTodoStatus(@PathVariable("id") Long id, @RequestBody ToDo todo) {
         Optional<ToDo> optionalTodo = todoRepository.findById(id);
         if (!optionalTodo.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-
         ToDo existingTodo = optionalTodo.get();
         existingTodo.setCompleted(todo.isCompleted());
         todoRepository.save(existingTodo);
