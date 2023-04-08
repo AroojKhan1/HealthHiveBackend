@@ -63,7 +63,7 @@ public class User {
     private List<ToDo> todoList = new ArrayList<>();
 
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<SymptomJournal> symptomJournal = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SymptomJournal> symptomJournal = new ArrayList<>();
 
 }
