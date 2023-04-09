@@ -1,18 +1,11 @@
 package hh.healthhive.Controller;
-
 import hh.healthhive.Model.Calorie;
-import hh.healthhive.Model.ToDo;
 import hh.healthhive.Repository.CalorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
