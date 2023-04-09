@@ -50,7 +50,6 @@ public class User {
     @NotNull
     private String role;
 
-
     private String first_Name;
 
     private String last_Name;
@@ -65,5 +64,8 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SymptomJournal> symptomJournal = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WaterIntake> waterIntakes = new ArrayList<>();
 
 }
