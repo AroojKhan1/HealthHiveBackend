@@ -6,8 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.sql.Time;
-import java.time.LocalDate;
+
 import java.time.LocalTime;
 
 
