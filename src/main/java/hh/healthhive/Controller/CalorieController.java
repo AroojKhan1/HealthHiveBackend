@@ -18,13 +18,22 @@ public class CalorieController {
     public String addMeal(@Valid @RequestBody Calorie calorie){
         calorie.setMeal_date(new Date());
         cr.save(calorie);
-        return "meal recorded";
+        return "Meal recorded!";
+    }
+
+    @GetMapping("/getAllcalorie")
+    @ResponseBody
+    public List<Calorie> getCalorie(){
+
+        List<Calorie> calories = cr.findAll();
+        return calories;
     }
 
     @GetMapping("/calorie")
     @ResponseBody
     public List<Calorie> getCalorieOnDay(@RequestParam("date")String date){
         System.out.println("date: "+date);
+
         List<Calorie> calories = cr.findByMeal_date(date);
         return calories;
     }

@@ -14,23 +14,26 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-@Table(name="Calorie")
-public class Calorie {
+@Table(name="Workout")
+public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "meal_typ")
-    private  String meal_typ;
+    @Column(name = "w_name")
+    private  String w_name;
 
-    @Column(name = "calorie")
-    private  int calorie;
+    @Column(name = "cal_burnt")
+    private  int cal_burnt;
 
-    @Column(name = "meal_date")
+    @Column(name = "reps")
+    private  String reps;
+
+    @Column(name = "w_date")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date meal_date;
+    private Date w_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "id_user")
