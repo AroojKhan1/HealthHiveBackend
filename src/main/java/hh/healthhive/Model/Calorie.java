@@ -32,9 +32,9 @@ public class Calorie {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date meal_date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", referencedColumnName = "id_user")
-    @JsonIgnore
-    private User user;
+    //    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "user_id", nullable = false)
+//    @JsonIgnore
+    private Long user;
 
 }

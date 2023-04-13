@@ -26,10 +26,10 @@ public class WaterController {
         return "Good job Keep on drinking";
     }
 
-    @GetMapping("/water")
+    @GetMapping("/water/{id}")
     @ResponseBody
-    public List<WaterIntake> getWaterData(){
-        List<WaterIntake> waterHist = wr.findAll();
+    public List<WaterIntake> getWaterData(@PathVariable Long id){
+        List<WaterIntake> waterHist = wr.findByUserId(id);
         return waterHist;
 
     }

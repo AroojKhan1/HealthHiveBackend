@@ -24,19 +24,19 @@ public class WorkoutController {
         return "Workout Recorded!";
     }
 
-    @GetMapping("/getAllworkouts")
+    @GetMapping("/getAllworkouts/{id}")
     @ResponseBody
-    public List<Workout> getWorkouts(){
-
-        List<Workout> workouts = wo_r.findAll();
+    public List<Workout> getWorkouts(@PathVariable Long id){
+        System.out.println("id"+id);
+        List<Workout> workouts = wo_r.findByUserId(id);
         return workouts;
     }
 
-    @GetMapping("/workout")
+    @GetMapping("/workout/{id}")
     @ResponseBody
-    public List<Workout> getWorkoutByDate(@RequestParam("date")String date){
+    public List<Workout> getWorkoutByDate(@RequestParam("date")String date, @PathVariable Long id){
         System.out.println("date: "+date);
-        List<Workout> workout = wo_r.findByW_date(date);
+        List<Workout> workout = wo_r.findByW_date_AndUserId(date,id);
         return workout;
     }
 
