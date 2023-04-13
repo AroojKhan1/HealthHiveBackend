@@ -25,14 +25,16 @@ public class SymptomController {
         symptomJournal.setSymptom_date(new Date());
         symptomJournal.setTime(LocalTime.now());
         sa.save(symptomJournal);
-        return "Added!";
+        return "Added! Reload to view.";
     }
 
-    @GetMapping("/symptoms")
+    @GetMapping("/symptoms/{id}")
     @ResponseBody
-    public List<SymptomJournal> getTodo() {
-
-        List<SymptomJournal> symps = sa.findAll();
+    public List<SymptomJournal> getSymp(@PathVariable Long id) {
+        System.out.println("id"+id);
+        List<SymptomJournal> symps = sa.findByUserId(id);
         return symps;
     }
+
+
 }

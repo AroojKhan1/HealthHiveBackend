@@ -12,7 +12,8 @@ package hh.healthhive.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer> {
     List<User> findByEmail(String email);
-
+    @Query(value = "select * from User where id_user = :id", nativeQuery = true  )
+    User findByUserId(Long id);
     @Query(value = "select * from User where user_name = :user_name", nativeQuery = true  )
     User findByUsername(String user_name);
 }

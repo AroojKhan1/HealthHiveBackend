@@ -15,6 +15,9 @@ public interface TodoRepository extends CrudRepository<ToDo, Long> {
 
     <S extends ToDo> List<S> findAll(Example<S> example);
 
+
+//    @Query(value = "select * from to_do  where id = :itemId", nativeQuery = true)
+//    List<ToDo> findById(Long itemId);
     @Query(value = "select * from to_do  where user_id = :userId", nativeQuery = true)
     List<ToDo> findByUserId(Long userId);
 

@@ -25,10 +25,11 @@ public class ToDo {
     @NotNull
     private boolean completed;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+    @Column(name = "user_id", nullable = false)
+//    @JsonIgnore
+    private Long user;
 
 
 

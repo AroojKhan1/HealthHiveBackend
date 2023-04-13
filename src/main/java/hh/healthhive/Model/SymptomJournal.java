@@ -37,8 +37,8 @@ public class SymptomJournal {
     @Column(name = "time")
     private LocalTime time;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", referencedColumnName = "id_user")
-    @JsonIgnore
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+@Column(name = "user_id", nullable = false)
+//    @JsonIgnore
+    private Long user;
 }
