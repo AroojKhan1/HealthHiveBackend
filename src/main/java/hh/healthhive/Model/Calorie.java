@@ -24,6 +24,11 @@ public class Calorie {
     @Column(name = "meal_typ")
     private  String meal_typ;
 
+
+    //new
+    @Column(name = "meal_name")
+    private  String meal_name;
+
     @Column(name = "calorie")
     private  int calorie;
 
