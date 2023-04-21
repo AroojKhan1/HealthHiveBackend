@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -61,6 +63,20 @@ public class UserController {
             return repository.findByEmail(email);
         }
 
+//    @GetMapping("/findUserbyid/{id}")
+//    public User findUserbyid(@PathVariable Long id) {
+//        System.out.println(id);
+////        String name = String.valueOf(repository.findNameByUserId(id));
+//        return repository.findByUserId(id);
+//    }
+
+//    @GetMapping("/findUserbyid/{id}")
+//    public ResponseEntity<Map<String, String>> findUserbyid(@PathVariable Long id) {
+//        String name = String.valueOf(repository.findByUserId(id));
+//        Map<String, String> response = new HashMap<>();
+//        response.put("name", name);
+//        return ResponseEntity.ok().body(response);
+//    }
         @DeleteMapping("/cancel/{id}")
         public List<User> cancelRegistration(@PathVariable int id) {
             repository.deleteById(id);

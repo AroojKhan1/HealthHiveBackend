@@ -29,7 +29,12 @@ public class ForumController {
     public String addPost(@Valid @RequestBody Post post, @PathVariable Long userId) {
         post.setPost_date(new Date());
         post.setTime(LocalTime.now());
+        System.out.println("time"+post.getTime());
         post.setUser(userId);
+
+        System.out.println("userId:" + userId);
+
+        System.out.println("post:" + post);
         pr.save(post);
         return "Post Uploaded!";
     }
@@ -44,16 +49,24 @@ public class ForumController {
 
     @PostMapping("/forum/{postId}/{userId}")
     public ResponseEntity<?> addReplyToPost(@PathVariable Long postId, @PathVariable Long userId, @RequestBody Reply reply) {
+
         Optional<Post> postOptional = pr.findById(postId);
         if(postOptional.isPresent()) {
             Post post = postOptional.get();
+
             reply.setReply_date(new Date());
             reply.setTime(LocalTime.now());
+            reply.setPost_id(postId);
             reply.setUser_id(userId);
-            post.setReply(reply);
+            post.setReply_content(reply.getContent());
+
+            pr.save(post);
+            System.out.println("replycontent:" + reply.getContent());
             rr.save(reply);
-            return ResponseEntity.ok("Reply Added to the post!");
+            return ResponseEntity.ok("");
         } else {
+
+            System.out.println("in else:" + userId);
             return ResponseEntity.notFound().build();
         }
 

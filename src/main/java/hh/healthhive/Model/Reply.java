@@ -22,9 +22,14 @@ public class Reply {
     @Column(name = "user_id")
     private long user_id;
 
+    @Column(name = "post_id")
+    private long post_id;
+
 
     @Column (name="content")
     private String content;
+
+
 
     @Column(name = "reply_date")
     @Temporal(TemporalType.DATE)
@@ -33,4 +38,7 @@ public class Reply {
 
     @Column(name = "time")
     private LocalTime time;
+
+//    @ManyToOne
+//    Post post;
 }

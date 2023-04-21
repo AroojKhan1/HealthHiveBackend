@@ -26,6 +26,9 @@ public class Post {
     @Column(name = "content")
     private  String content;
 
+    @Column(name = "reply_content")
+    private  String reply_content;
+
     @Column(name = "post_date")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -39,6 +42,5 @@ public class Post {
 //    @JsonIgnore
     private Long user;
 
-    @ManyToOne
-    Reply reply;
+
 }
