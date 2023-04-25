@@ -1,5 +1,6 @@
 package hh.healthhive.Controller;
 
+import hh.healthhive.Model.Calorie;
 import hh.healthhive.Model.SymptomJournal;
 import hh.healthhive.Model.ToDo;
 import hh.healthhive.Repository.SymptomsRepository;
@@ -34,6 +35,16 @@ public class SymptomController {
         System.out.println("id"+id);
         List<SymptomJournal> symps = sa.findByUserId(id);
         return symps;
+    }
+
+
+    @GetMapping("/symptom/{id}")
+    @ResponseBody
+    public List<SymptomJournal> getSymptomOnDay(@RequestParam("date")String date, @PathVariable Long id){
+        System.out.println("date: "+date);
+
+        List<SymptomJournal> symp = sa.findSympByMeal_date_AndId(date,id);
+        return symp;
     }
 
 

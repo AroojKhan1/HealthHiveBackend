@@ -35,7 +35,7 @@ public class UserController {
         public ResponseEntity<String> register(@Valid @RequestBody User user) {
 
 
-            String suc= "Hi " + user.getUser_name() + "Welcome to the Hive! Login using your username & password";
+            String suc= "Hi " + user.getUser_name() + ", Welcome to the Hive! \n Login using your username & password";
             try {
                 Role role = new Role();
                 role.setRole(user.getRole());
@@ -51,6 +51,7 @@ public class UserController {
                 String errorMessage = "An error occurred while registering the user.";
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
             }
+
         }
 
         @GetMapping("/getAllUsers")
@@ -63,20 +64,7 @@ public class UserController {
             return repository.findByEmail(email);
         }
 
-//    @GetMapping("/findUserbyid/{id}")
-//    public User findUserbyid(@PathVariable Long id) {
-//        System.out.println(id);
-////        String name = String.valueOf(repository.findNameByUserId(id));
-//        return repository.findByUserId(id);
-//    }
 
-//    @GetMapping("/findUserbyid/{id}")
-//    public ResponseEntity<Map<String, String>> findUserbyid(@PathVariable Long id) {
-//        String name = String.valueOf(repository.findByUserId(id));
-//        Map<String, String> response = new HashMap<>();
-//        response.put("name", name);
-//        return ResponseEntity.ok().body(response);
-//    }
         @DeleteMapping("/cancel/{id}")
         public List<User> cancelRegistration(@PathVariable int id) {
             repository.deleteById(id);
