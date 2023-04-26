@@ -1,17 +1,16 @@
 package hh.healthhive.Controller;
 
-import hh.healthhive.Model.Post;
-import hh.healthhive.Model.Reply;
-import hh.healthhive.Model.SymptomJournal;
-import hh.healthhive.Model.Workout;
+import hh.healthhive.Model.*;
 import hh.healthhive.Repository.PostRepository;
 import hh.healthhive.Repository.ReplyRepository;
+import hh.healthhive.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +22,9 @@ public class ForumController {
     ReplyRepository rr;
     @Autowired
     PostRepository pr;
+
+    @Autowired
+    UserRepository ur;
 
 
     @PostMapping("/forum/{userId}")
@@ -63,7 +65,7 @@ public class ForumController {
             pr.save(post);
             System.out.println("replycontent:" + reply.getContent());
             rr.save(reply);
-            return ResponseEntity.ok("");
+            return ResponseEntity.ok("Reply posted!");
         } else {
 
             System.out.println("in else:" + userId);
@@ -74,8 +76,20 @@ public class ForumController {
 
     @GetMapping("/forum/{postId}")
     @ResponseBody
-    public List<Reply> getAllReplies() {
-        return rr.findAll();
+    public List<ReplyResponse> getAllReplies(@PathVariable Long postId) {
+        List<Reply> replies = rr.findByPostId(postId);
+        List<ReplyResponse> response = new ArrayList<>();
+
+        for(Reply r: replies){
+            User user = ur.findByUserId(r.getUser_id());
+            ReplyResponse rr = new ReplyResponse();
+            rr.setReply(r);
+            rr.setUserName(user.getUser_name());
+            response.add(rr);
+        }
+
+
+        return response;
     }
 
 }

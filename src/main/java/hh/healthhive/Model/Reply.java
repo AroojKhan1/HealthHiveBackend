@@ -39,6 +39,7 @@ public class Reply {
     @Column(name = "time")
     private LocalTime time;
 
+
 //    @ManyToOne
 //    Post post;
 }
