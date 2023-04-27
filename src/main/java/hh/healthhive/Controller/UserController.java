@@ -39,6 +39,13 @@ public class UserController {
             try {
                 Role role = new Role();
                 role.setRole(user.getRole());
+
+                String userRole = user.getRole();
+                System.out.println("role:" + userRole);
+                if(userRole.equalsIgnoreCase("doctor")){
+                    System.out.println("adding to user name ");
+                    user.setUser_name("Dr. " + user.getUser_name());
+                }
                 repository.save(user);
                 role.setUser(user);
                 roleRepository.save(role);

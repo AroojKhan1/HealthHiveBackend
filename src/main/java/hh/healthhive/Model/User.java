@@ -54,6 +54,7 @@ public class User {
 
     private String last_Name;
 
+
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Role> roles = new ArrayList<>();
 
