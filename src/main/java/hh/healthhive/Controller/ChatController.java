@@ -16,13 +16,6 @@ public class ChatController {
     @Autowired
     UserRepository userRepository;
 
-//    @GetMapping("/askDr/{id}")
-//    @ResponseBody
-//    public String getUserName(@PathVariable Long id){
-//        User user = userRepository.findByUserId(id);
-//        return user.getUser_name();
-//
-//    }
 
     @GetMapping("/askDr/{id}")
     @ResponseBody
